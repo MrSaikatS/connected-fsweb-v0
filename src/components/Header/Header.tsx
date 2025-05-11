@@ -1,6 +1,6 @@
 import { HeaderProps } from "@/lib/types";
 import Link from "next/link";
-import ThemeToggleButton from "../ui/ThemeToggleButton";
+import ThemeToggleButton from "../ThemeToggleButton";
 
 const Header = ({ appName }: HeaderProps) => {
   return (
