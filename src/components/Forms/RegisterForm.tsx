@@ -23,6 +23,7 @@ const RegisterForm = () => {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
     mode: "all",
   });
