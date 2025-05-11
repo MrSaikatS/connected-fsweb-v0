@@ -16,6 +16,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const loginHookForm = useForm<LoginType>({
@@ -33,6 +34,7 @@ const LoginForm = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // API call would go here
       console.log(loginData);
+      toast.success("Login successful!");
       // Handle successful login (e.g., redirect, set auth state)
     } catch (error) {
       console.error("Login failed:", error);
