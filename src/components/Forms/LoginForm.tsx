@@ -29,9 +29,15 @@ const LoginForm = () => {
   });
 
   const userLoginFunction = async (loginData: LoginType) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    console.log(loginData);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // API call would go here
+      console.log(loginData);
+      // Handle successful login (e.g., redirect, set auth state)
+    } catch (error) {
+      console.error("Login failed:", error);
+      // Handle the error (e.g., display error message)
+    }
   };
 
   return (
