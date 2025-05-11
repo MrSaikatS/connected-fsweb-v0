@@ -29,11 +29,11 @@ model User {
 }
 
 model Session {
-  id        String   @id
+  id        String   @id @default(uuid())
   expiresAt DateTime
   token     String   @unique
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   ipAddress String?  @db.Text
   userAgent String?  @db.Text
   userId    String
@@ -45,7 +45,7 @@ model Session {
 model Account {
   id                    String    @id @default(uuid())
   accountId             String    @unique
-  providerId            String    @unique
+  providerId            String
   userId                String
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?   @db.Text
@@ -63,7 +63,7 @@ model Account {
 }
 
 model Verification {
-  id         String    @id
+  id         String    @id @default(uuid())
   identifier String    @db.Text
   value      String    @db.Text
   expiresAt  DateTime
