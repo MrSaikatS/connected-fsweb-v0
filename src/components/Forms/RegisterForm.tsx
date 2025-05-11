@@ -29,9 +29,15 @@ const RegisterForm = () => {
   });
 
   const userRegisterFunction = async (registerData: RegisterType) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    console.log(registerData);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // API call would go here
+      console.log(registerData);
+      // Handle successful registration (e.g., redirect, show success message)
+    } catch (error) {
+      console.error("Registration failed:", error);
+      // Handle the error (e.g., display error message)
+    }
   };
 
   return (
