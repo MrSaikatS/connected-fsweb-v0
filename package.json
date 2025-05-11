@@ -8,7 +8,7 @@
     "build": "next lint && next build",
     "start": "next start",
     "lint": "next lint",
-    "prod": "rm -rf .next && next build && next start"
+    "prod": "rm -rf .next && next lint && next build && next start"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",
