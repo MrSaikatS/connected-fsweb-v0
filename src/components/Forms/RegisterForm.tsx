@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { toast } from "react-toastify";
 
 const RegisterForm = () => {
   const registerHookForm = useForm<RegisterType>({
@@ -33,6 +34,7 @@ const RegisterForm = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // API call would go here
       console.log(registerData);
+      toast.success("Registration successful!");
       // Handle successful registration (e.g., redirect, show success message)
     } catch (error) {
       console.error("Registration failed:", error);
