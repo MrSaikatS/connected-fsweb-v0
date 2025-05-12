@@ -1,10 +1,13 @@
 "use client";
 
+import userSignUp from "@/hooks/userSignUp";
 import { RegisterType } from "@/lib/types";
 import { registerSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Signature } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Button } from "../ui/button";
 import {
   Form,
@@ -15,9 +18,10 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { toast } from "react-toastify";
 
 const RegisterForm = () => {
+  const { replace } = useRouter();
+
   const registerHookForm = useForm<RegisterType>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -30,15 +34,18 @@ const RegisterForm = () => {
   });
 
   const userRegisterFunction = async (registerData: RegisterType) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      // API call would go here
-      console.log(registerData);
-      toast.success("Registration successful!");
-      // Handle successful registration (e.g., redirect, show success message)
-    } catch (error) {
-      console.error("Registration failed:", error);
-      // Handle the error (e.g., display error message)
+    const { success, message } = await userSignUp(registerData);
+
+    if (!success) {
+      toast.error(message);
+    }
+
+    if (success) {
+      registerHookForm.reset();
+
+      toast.success(message);
+
+      replace("/auth/login");
     }
   };
 
