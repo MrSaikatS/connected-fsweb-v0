@@ -23,7 +23,8 @@ export type HeaderProps = {
  * Inferred from Zod schema that validates:
  * - name
  * - email
- * - password
+ * - passwords
+ * - confirmPassword
  */
 export type RegisterType = z.infer<typeof registerSchema>;
 
@@ -32,6 +33,6 @@ export type RegisterType = z.infer<typeof registerSchema>;
  * Inferred from Zod schema that validates:
  * - email
  * - password
- * - remember me option
+ * - remember me
  */
 export type LoginType = z.infer<typeof loginSchema>;
