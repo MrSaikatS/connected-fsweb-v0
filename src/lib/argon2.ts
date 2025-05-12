@@ -17,7 +17,9 @@ export const hashPasswordFunction = async (password: string) => {
 export const verifyPasswordFunction = async (data: VerifyPasswordParameter) => {
   const { hash, password } = data;
 
-  const verifiedPassword = await verify(hash, password);
+  const verifiedPassword = await verify(hash, password, {
+    secret: Buffer.from(serverEnv.BETTER_AUTH_SECRET),
+  });
 
   return verifiedPassword;
 };
