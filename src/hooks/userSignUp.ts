@@ -12,19 +12,12 @@ const userSignUp = async (registerData: RegisterType) => {
   });
 
   if (error) {
-    const { message: errorMessage, statusText } = error;
+    const { message, statusText } = error;
 
-    if (errorMessage === undefined) {
-      return {
-        success: false,
-        message: statusText,
-      };
-    } else {
-      return {
-        success: false,
-        message: errorMessage,
-      };
-    }
+    return {
+      success: false,
+      message: message || statusText,
+    };
   }
 
   return {
