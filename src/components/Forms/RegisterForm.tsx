@@ -5,7 +5,6 @@ import { RegisterType } from "@/lib/types";
 import { registerSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Signature } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button } from "../ui/button";
@@ -20,8 +19,6 @@ import {
 import { Input } from "../ui/input";
 
 const RegisterForm = () => {
-  const { replace } = useRouter();
-
   const registerHookForm = useForm<RegisterType>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -44,8 +41,6 @@ const RegisterForm = () => {
       registerHookForm.reset();
 
       toast.success(message);
-
-      replace("/auth/login");
     }
   };
 

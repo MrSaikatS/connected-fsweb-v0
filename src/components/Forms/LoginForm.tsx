@@ -1,11 +1,14 @@
 "use client";
 
+import userLogIn from "@/hooks/userLogIn";
 import { LoginType } from "@/lib/types";
 import { loginSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, LogIn } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Button } from "../ui/button";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -15,8 +18,6 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { Checkbox } from "../ui/checkbox";
-import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const loginHookForm = useForm<LoginType>({
@@ -30,15 +31,14 @@ const LoginForm = () => {
   });
 
   const userLoginFunction = async (loginData: LoginType) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      // API call would go here
-      console.log(loginData);
-      toast.success("Login successful!");
-      // Handle successful login (e.g., redirect, set auth state)
-    } catch (error) {
-      console.error("Login failed:", error);
-      // Handle the error (e.g., display error message)
+    const { success, message } = await userLogIn(loginData);
+
+    if (!success) {
+      toast.error(message);
+    }
+
+    if (success) {
+      toast.success(message);
     }
   };
 
