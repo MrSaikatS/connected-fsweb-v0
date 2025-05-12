@@ -38,11 +38,7 @@ const LoginForm = () => {
     }
 
     if (success) {
-      // registerHookForm.reset();
-
       toast.success(message);
-
-      // replace("/auth/login");
     }
   };
 
