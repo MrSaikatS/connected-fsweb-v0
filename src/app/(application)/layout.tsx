@@ -13,11 +13,9 @@ const ApplicationLayout = async ({ children }: LayoutProps) => {
     redirect("/auth/login");
   }
 
-  console.log(session);
-
   return (
     <>
-      <Header appName="NST App" />
+      <Header appName="ConnectEd" />
 
       <main className="container mx-auto px-6 py-3">{children}</main>
     </>
