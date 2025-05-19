@@ -11,19 +11,25 @@ export async function middleware(request: NextRequest) {
 
   const isPublicPath = request.nextUrl.pathname.startsWith("/auth");
 
-  const sessionCookie = getSessionCookie(request, {
-    cookiePrefix: "connected",
-  });
+  try {
+    const sessionCookie = getSessionCookie(request, {
+      cookiePrefix: "connected",
+    });
 
-  if (!sessionCookie && !isPublicPath) {
+    if (!sessionCookie && !isPublicPath) {
+      return NextResponse.redirect(new URL("/auth/login", request.url));
+    }
+
+    if (sessionCookie && isPublicPath) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.error("Error in auth middleware:", error);
+    // On error, redirect to login as a fallback for security
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
-
-  if (sessionCookie && isPublicPath) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
-  return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
